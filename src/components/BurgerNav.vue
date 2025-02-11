@@ -19,8 +19,9 @@ const toggleMenu = () => {
               stroke-width="48" d="M88 152h336M88 256h336M88 360h336"/>
       </svg>
     </div>
-    <div class="" v-if="true">
+    <div v-if="true">
       <Teleport to="body">
+        <div v-if="burgerIsOpen" class="menu-overlay" @click="toggleMenu"></div>
         <div class="burgerNav" :class="{open: burgerIsOpen}">
           <ul>
             <li v-for="(_, rootName) in cocktailStore.cocktails" :key="rootName">
@@ -42,6 +43,15 @@ const toggleMenu = () => {
 </template>
 
 <style scoped lang="scss">
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 30;
+}
 .burgerButton {
   width: 5rem;
   height: 5rem;
@@ -158,7 +168,7 @@ const toggleMenu = () => {
 }
 
 @media screen and (min-width: 724px) {
-  .burgerNav, .burgerButton, .relative {
+  .burgerNav, .burgerButton, .relative, .menu-overlay {
     display: none;
   }
 
